@@ -56,3 +56,17 @@
 作者信息：提交的作者。
 日期：提交的时间和日期。
 提交信息：你在执行 git commit 时输入的提交信息
+
+#### `git checkout`
+>git checkout 是 Git 中非常常用的命令，用于切换分支、恢复文件或查看某个特定的提交。  
+>>切换分支：用于切换到另一个分支。  
+命令: git checkout <分支名>   
+示例: git checkout main 切换到 main 分支。    
+
+>>恢复文件：恢复工作目录中的文件到上一个提交的状态，或恢复为暂存区的状态。  
+命令: git checkout -- <文件名>  
+示例: git checkout -- file1.txt 将 file1.txt 恢复为上一次提交的状态。  
+
+>>查看某个特定提交：用于切换到某个提交的状态（注意，这种切换会进入“分离头指针”状态）。  
+命令: git checkout <提交哈希>  
+示例: git checkout 1a2b3c4d 切换到指定的提交。  
