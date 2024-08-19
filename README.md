@@ -1,7 +1,7 @@
 # 伯克利C61B课的笔记
 >## 学习内容包括
 >### java基础  
->### [git等工具](https://github.com/shymoy/data_structure_C61B/edit/main/README.md#git%E7%AE%A1%E7%90%86%E6%96%B9%E6%B3%95)
+>### [git等工具](https://github.com/shymoy/data_structure_C61B/tree/main?tab=readme-ov-file#git%E7%AE%A1%E7%90%86%E6%96%B9%E6%B3%95)
 >### 数据结构
 
 
