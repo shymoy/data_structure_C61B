@@ -38,9 +38,9 @@
 >>>>例子: git commit -m "添加了新的功能"
 
 #### `git status` 
->>命令：git status
-功能：显示当前项目的状态，包括哪些文件已更改、哪些文件已被暂存等待提交，以及哪些文件未被跟踪。
-主要输出信息：
-**Changes not staged for commit**（未暂存的更改）：表示已修改但未添加到暂存区的文件。
-**Changes to be committed**（待提交的更改）：表示已暂存并准备提交的文件。
+>命令：git status
+>>功能：显示当前项目的状态，包括哪些文件已更改、哪些文件已被暂存等待提交，以及哪些文件未被跟踪。  
+>>>主要输出信息：  
+**Changes not staged for commit**（未暂存的更改）：表示已修改但未添加到暂存区的文件。  
+**Changes to be committed**（待提交的更改）：表示已暂存并准备提交的文件。  
 **Untracked files**（未跟踪的文件）：表示未被添加到版本控制中的新文件。
