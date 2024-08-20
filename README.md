@@ -69,4 +69,14 @@
 
 >>查看某个特定提交：用于切换到某个提交的状态（注意，这种切换会进入“分离头指针”状态）。  
 命令: git checkout <提交哈希>  
-示例: git checkout 1a2b3c4d 切换到指定的提交。  
+示例: git checkout 1a2b3c4d 切换到指定的提交。
+
+
+#### `git reset`
+>>移除文件从暂存区中：  
+git reset HEAD filename.txt  
+这会将 filename.txt 从暂存区中移除，但文件本身的修改仍然存在于工作目录中。
+
+#### `git commit --amend`
+>>作用：用来补充提交或者修改上次的提交  
+>>**注意：会替换最新的一次提交，哈希值也会变换**
