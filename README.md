@@ -107,6 +107,23 @@ git remote remove <远程名称>
 **重命名**  
 你可以重命名一个远程仓库：  
 git remote rename <旧名称> <新名称>  
+
+#### `git push`
+**基本用法**
+git push <远程名称> <分支名称>
+这会将本地的 master 分支推送到远程仓库 origin 的 master 分支。
+
+**常用选项**
+`-u` ：设置上游分支
+>e.g:git push -u origin master
+这会将 origin/master 设置为 master 分支的上游分支，以后可以只使用 git push 直接推送到远程。
+
+`-f`:强制推送
+>有时候，当远程仓库的历史与你的本地仓库的历史不一致时（例如你使用了 git rebase 重新整理了提交历史），你可能需要强制推送：**注意：强制推送会覆盖远程仓库中的历史记录，可能导致其他人的工作丢失，因此要谨慎使用**
+
+`--delete`
+>git push origin --delete <分支名称>
+
 ### 问题
 
 - git clone的同时会remote与远程库建立连接，reo在文件夹里面。
