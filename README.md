@@ -5,6 +5,49 @@
 >### [git等工具](https://github.com/shymoy/data_structure_C61B/tree/main?tab=readme-ov-file#git%E7%AE%A1%E7%90%86%E6%96%B9%E6%B3%95)
 >### 数据结构
 # 正文
+## java基础  
+### 基本特性
+- 强类型语言
+- 面向对象的语言  
+- 静态类型语言  
+>变量和函数返回值的类型永远不能改变
+所有java程序在运行之前就被验证了
+(更好的捕捉错误，方便了debug，在用户端永远不会发生类型错误)
+
+#### 语法特性  
+- **文件的名称必须与class名一致** 否则无法运行
+- 结尾有分号;作为结束
+- 所有的代码都必须是类的一部分
+- 注释为/* **/
+- String[] args是用来读取command line后面的字符的
+>e.g:java HelloWorld 10 20
+args[0] = 10
+
+#### 与其他语言的区别  
+- Array的命名为int[] num = new int[10];  
+- new与c的区别:
+>- c中new在堆上分配之后需要自己delete掉  
+Java会自己释放
+>- java的new返回的是reference（引用）  
+c返回的是指针
+
+- **Enhanced loop**:
+  ```
+  int[] numbers = {1, 2, 3, 4, 5};
+    for (int number : numbers) {
+        System.out.println(number);
+    }
+  ```
+
+#### 在terminal使用java  
+>1. 先javac xx.java文件 进行编译把它变成一个.class file
+>2. 再java class文件
+ >3. 为什么要进行编译=》
+     a. 进行类型检查，确保应用分发到用户手里不会出现类型错误
+     b. 让电脑更容易执行
+     c. 利于安全
+ >4. 注意：文件名必须与类名一致
+>**只编译主函数类也会自动编译其他的类**
 ## git管理方法
 
 定义：一个代码的版本管理工具
