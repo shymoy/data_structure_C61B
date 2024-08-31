@@ -8,15 +8,16 @@ public class ArrayDeque<T> {
     public ArrayDeque() {
         item = (T[]) new Object[8];
         size = 0;
-        front = item.length - 1;
-        last = 0;
+        front = item.length / 2;
+        last = item.length / 2 + 1;
     }
+
 
     private void resize(int capacity) {
         T[] temp = (T[]) new Object[capacity];
-        int start = (front + 1) % item.length;
         for (int i = 0; i < size; i++) {
-            temp[i] = item[(start + i) % item.length];
+            temp[i] = item[(front + 1) % item.length];
+            front++;
         }
         item = temp;
         front = capacity - 1;
@@ -27,8 +28,8 @@ public class ArrayDeque<T> {
         if (size == item.length) {
             resize(size * 2);
         }
-        front = (front - 1 + item.length) % item.length;
         item[front] = x;
+        front = (front - 1 + item.length) % item.length;
         size++;
     }
 
@@ -53,11 +54,10 @@ public class ArrayDeque<T> {
         if (size == 0) {
             return null;
         }
+        front = (front + 1) % item.length;
         T x = item[front];
         item[front] = null;
-        front = (front + 1) % item.length;
         size--;
-
         if ((double) size / item.length < 0.25 && size > 16) {
             resize(item.length / 2);
         }
@@ -72,7 +72,6 @@ public class ArrayDeque<T> {
         T x = item[last];
         item[last] = null;
         size--;
-
         if ((double) size / item.length < 0.25 && size > 16) {
             resize(item.length / 2);
         }
@@ -83,14 +82,16 @@ public class ArrayDeque<T> {
         if (index < 0 || index >= size) {
             return null;
         }
-        int start = (front + 1) % item.length;
+        int start = front + 1;
         return item[(start + index) % item.length];
     }
 
     public void printDeque() {
-        int start = (front + 1) % item.length;
+        int start = front + 1;
         for (int i = 0; i < size; i++) {
-            System.out.print(item[(start + i) % item.length] + " ");
+
+            System.out.print(item[start % item.length] + " ");
+            start++;
         }
     }
 }
