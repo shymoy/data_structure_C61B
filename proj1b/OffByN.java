@@ -2,9 +2,9 @@ public class OffByN implements CharacterComparator {
 
     private int exceptDiffrence;
 
-    public OffByN(int x) {
+    public OffByN(int N) {
 
-        exceptDiffrence = x;
+        exceptDiffrence = N;
 
     }
 

@@ -1,10 +1,10 @@
-/** This class outputs all palindromes in the words file in current directory. *//*
+// This class outputs all palindromes in the words file in current directory.
 
 public class PalindromeFinder {
     public static void main(String[] args) {
         int minLength = 4;
         In in = new In("../library-sp18/data/words.txt");
-        palindorme palindrome = new palindorme();
+        Palindrome palindrome = new Palindrome();
         CharacterComparator cc1 = new OffByOne();
         CharacterComparator ccN = new OffByN(3);
 
@@ -16,4 +16,3 @@ public class PalindromeFinder {
         }
     }
 }
-*/

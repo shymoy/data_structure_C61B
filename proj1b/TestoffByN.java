@@ -12,5 +12,9 @@ public class TestoffByN {
         assertTrue(OffByN.equalChars('a', 'f'));
 
         assertFalse(OffByN.equalChars('h', 'f'));
+
+        assertTrue(OffByN.equalChars('F', 'a'));
+
+        assertTrue(OffByN.equalChars('&', '*'));
     }
 }

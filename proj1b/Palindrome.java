@@ -33,6 +33,9 @@ public class Palindrome {
         String A = isPalindromeHelperPositive(L);
         String B = isPalindromeHelperNegtive(R);
 
+        A = A.toLowerCase();
+        B = B.toLowerCase();
+
         return A.equals(B);
     }
 
@@ -42,6 +45,7 @@ public class Palindrome {
         Deque<Character> R = wordToDeque(word);
 
         boolean result = true;
+
         for (int i = 0; i < word.length() / 2; i++) {
 
             if (!cc.equalChars(L.removeFirst(), R.removeLast())) {
