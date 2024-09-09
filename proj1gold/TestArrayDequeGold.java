@@ -8,7 +8,7 @@ public class TestArrayDequeGold {
     public void TestArrayDeque() {
 
         //instantiate Demo and test class
-        StudentArrayDeque<Integer> StudentL= new StudentArrayDeque<>();
+        StudentArrayDeque<Integer> StudentL = new StudentArrayDeque<>();
         ArrayDequeSolution<Integer> DemoL = new ArrayDequeSolution<>();
         String log = "";
         for (int i = 0; i < 1000; i++) {
@@ -29,19 +29,20 @@ public class TestArrayDequeGold {
                 case 1:
                     StudentL.addLast(addNumber);
                     DemoL.addLast(addNumber);
-                    log = log +"addLast(" + addNumber + ")\n";
+                    log = log + "addLast(" + addNumber + ")\n";
                     break;
                 case 2:
                     removeExpect = DemoL.removeFirst();
                     removActual = StudentL.removeFirst();
-                    log = log +"removeFirst()\n";
+                    log = log + "removeFirst()\n";
                     break;
                 case 3:
                     removeExpect = DemoL.removeLast();
                     removActual = StudentL.removeLast();
-                    log = log +"removeLast()\n";
+                    log = log + "removeLast()\n";
                     break;
             }
-            assertEquals(log,removeExpect,removActual);
+            assertEquals(log, removeExpect, removActual);
+        }
     }
 }
