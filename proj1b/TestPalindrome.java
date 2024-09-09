@@ -1,4 +1,5 @@
 import org.junit.Test;
+
 import static org.junit.Assert.*;
 
 public class TestPalindrome {
@@ -27,7 +28,7 @@ public class TestPalindrome {
         assertFalse(palindrome.isPalindrome("ab"));
         assertFalse(palindrome.isPalindrome("ababba"));
 
-        assertTrue(palindrome.isPalindrome("flake",offByOne));
+        assertTrue(palindrome.isPalindrome("flake", offByOne));
     }
 
    /* @Test

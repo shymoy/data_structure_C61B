@@ -1,5 +1,7 @@
 import org.junit.Test;
+
 import static org.junit.Assert.*;
+
 public class TestoffByN {
     static CharacterComparator OffByN = new OffByN(5);
 

@@ -12,20 +12,18 @@ public class Palindrome {
     }
 
     private String isPalindromeHelper_positive(Deque<Character> L) {
-        if(L.isEmpty()){
+        if (L.isEmpty()) {
             return "";
-        }
-        else {
-            return L.removeFirst()+isPalindromeHelper_positive(L);
+        } else {
+            return L.removeFirst() + isPalindromeHelper_positive(L);
         }
     }
 
     private String isPalindromeHelper_negtive(Deque<Character> L) {
-        if(L.isEmpty()){
+        if (L.isEmpty()) {
             return "";
-        }
-        else {
-            return L.removeLast()+isPalindromeHelper_negtive(L);
+        } else {
+            return L.removeLast() + isPalindromeHelper_negtive(L);
         }
     }
 
@@ -40,14 +38,14 @@ public class Palindrome {
     }
 
 
-    public boolean isPalindrome(String word,CharacterComparator cc){
+    public boolean isPalindrome(String word, CharacterComparator cc) {
         Deque<Character> L = wordToDeque(word);
         Deque<Character> R = wordToDeque(word);
 
         boolean result = true;
-        for(int i = 0; i < word.length()/2; i++){
+        for (int i = 0; i < word.length() / 2; i++) {
 
-            if(!cc.equalChars(L.removeFirst(),R.removeLast())) {
+            if (!cc.equalChars(L.removeFirst(), R.removeLast())) {
                 result = false;
             }
         }
