@@ -33,16 +33,15 @@ public class TestArrayDequeGold {
                     break;
                 case 2:
                     removeExpect = DemoL.removeFirst();
-                    removActual = StudentL.removeLast();
+                    removActual = StudentL.removeFirst();
                     log = log +"removeFirst()\n";
                     break;
                 case 3:
                     removeExpect = DemoL.removeLast();
-                    removActual = StudentL.removeFirst();
+                    removActual = StudentL.removeLast();
                     log = log +"removeLast()\n";
                     break;
             }
-           assertEquals(log,removeExpect,removActual);
-        }
+            assertEquals(log,removeExpect,removActual);
     }
 }
