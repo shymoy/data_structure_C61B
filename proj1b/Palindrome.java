@@ -30,9 +30,9 @@ public class Palindrome {
         Deque<Character> L = wordToDeque(word);
         Deque<Character> R = wordToDeque(word);
 
-       if(word == null || word.length() <= 1) {
-           return true;
-       }
+        if (word == null || word.length() <= 1) {
+            return true;
+        }
         for (int i = 0; i < word.length() / 2; i++) {
 
             if (!cc.equalChars(L.removeFirst(), R.removeLast())) {
