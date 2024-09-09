@@ -4,7 +4,7 @@ import static org.junit.Assert.*;
 public class TestPalindrome {
     // You must use this palindrome, and not instantiate
     // new Palindromes, or the autograder might be upset.
-    static palindorme palindrome = new palindorme();
+    static Palindrome palindrome = new Palindrome();
     static CharacterComparator offByOne = new OffByOne();
 
     @Test
