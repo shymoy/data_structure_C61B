@@ -1,3 +1,4 @@
+import org.junit.Assert;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
@@ -13,8 +14,8 @@ public class TestoffByN {
 
         assertFalse(OffByN.equalChars('h', 'f'));
 
-        assertTrue(OffByN.equalChars('F', 'a'));
+        assertFalse(OffByN.equalChars('f', 'A'));
 
-        assertTrue(OffByN.equalChars('&', '*'));
+
     }
 }
