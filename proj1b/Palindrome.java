@@ -7,23 +7,22 @@ public class Palindrome {
         for (int i = 0; i < word.length(); i++) {
             L.addLast(word.charAt(i));
         }
-
         return L;
     }
 
-    private String isPalindromeHelper_positive(Deque<Character> L) {
+    private String isPalindromeHelperPositive(Deque<Character> L) {
         if (L.isEmpty()) {
             return "";
         } else {
-            return L.removeFirst() + isPalindromeHelper_positive(L);
+            return L.removeFirst() + isPalindromeHelperPositive(L);
         }
     }
 
-    private String isPalindromeHelper_negtive(Deque<Character> L) {
+    private String isPalindromeHelperNegtive(Deque<Character> L) {
         if (L.isEmpty()) {
             return "";
         } else {
-            return L.removeLast() + isPalindromeHelper_negtive(L);
+            return L.removeLast() + isPalindromeHelperNegtive(L);
         }
     }
 
@@ -31,8 +30,8 @@ public class Palindrome {
         Deque<Character> L = wordToDeque(word);
         Deque<Character> R = wordToDeque(word);
 
-        String A = isPalindromeHelper_positive(L);
-        String B = isPalindromeHelper_negtive(R);
+        String A = isPalindromeHelperPositive(L);
+        String B = isPalindromeHelperNegtive(R);
 
         return A.equals(B);
     }

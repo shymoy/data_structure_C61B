@@ -1,10 +1,10 @@
 public class OffByN implements CharacterComparator {
 
-    private int except_Diffrence;
+    private int exceptDiffrence;
 
     public OffByN(int x) {
 
-        except_Diffrence = x;
+        exceptDiffrence = x;
 
     }
 
@@ -13,6 +13,6 @@ public class OffByN implements CharacterComparator {
 
         int diffrence = Math.abs(Character.toLowerCase(x) - Character.toLowerCase(y));
 
-        return except_Diffrence == diffrence;
+        return exceptDiffrence == diffrence;
     }
 }
