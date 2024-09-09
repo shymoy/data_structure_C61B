@@ -42,8 +42,7 @@ public class TestArrayDequeGold {
                     log = log +"removeLast()\n";
                     break;
             }
-            assertEquals("\n" + log + "\nOh no!!!!!!!!!\nUnfortunately you got a bad random number\n" +
-                    "The expect number should be " + removeExpect + " but get " + removActual,removeExpect,removActual);
+           assertEquals(log,removeExpect,removActual);
         }
     }
 }
