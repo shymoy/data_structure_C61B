@@ -1,12 +1,13 @@
 package synthesizer;
 
+
 import java.util.Random;
 
 public class GuitarString {
     private static final int SR = 44100;
     private static final double DECAR = .996;
 
-    Random random = new Random();
+    private Random random = new Random();
     //to store the voice data
     private BoundedQueue<Double> buffer;
 

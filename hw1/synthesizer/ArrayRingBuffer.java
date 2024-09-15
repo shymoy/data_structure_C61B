@@ -6,9 +6,9 @@ import java.util.NoSuchElementException;
 
 public class ArrayRingBuffer<T> extends AbstractBoundedQueue<T> {
     //index to the head queue and the tail queue
-    int first;
-    int last;
-    T[] rb;
+    private int first;
+    private int last;
+    private T[] rb;
 
     //The constructor
     public ArrayRingBuffer(int capacity) {
@@ -56,6 +56,9 @@ public class ArrayRingBuffer<T> extends AbstractBoundedQueue<T> {
 
     @Override
     public T peek() {
+        if (fillCount == 0) {
+            throw new RuntimeException("Ring Buffer Underflow");
+        }
         return rb[first];
     }
 
