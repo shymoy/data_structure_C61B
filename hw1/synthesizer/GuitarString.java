@@ -8,7 +8,7 @@ public class GuitarString {
 
     Random random = new Random();
     //to store the voice data
-    private BondedQueue<Double> buffer;
+    private BoundedQueue<Double> buffer;
 
     //initalize
     public GuitarString(double frecuency) {
