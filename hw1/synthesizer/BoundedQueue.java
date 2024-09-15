@@ -12,9 +12,5 @@ public interface BoundedQueue<T> extends Iterable<T> {
 
     T peek();
 
-    boolean isEmpty();
-
-    boolean isFull();
-
     Iterator<T> iterator();
 }

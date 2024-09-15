@@ -12,11 +12,11 @@ public abstract class AbstractBoundedQueue<T> implements BoundedQueue<T> {
         return fillCount;
     }
 
-    public boolean isEmpty() {
+    private boolean isEmpty() {
         return fillCount == 0;
     }
 
-    public boolean isFull() {
+    private boolean isFull() {
         return fillCount == capacity;
     }
 }
