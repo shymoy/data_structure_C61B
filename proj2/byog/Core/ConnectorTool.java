@@ -37,11 +37,6 @@ public class ConnectorTool {
         return Terrain.rooms.get(n);
     }
 
-    //check this room has connected Yes,return true
-    public static boolean isConnected(Room room) {
-        return room.connectionLine > 0;
-    }
-
     //fix the lengthDiffer
     public static int caulLengthDiffer(int Differ) {
         if (Differ > 0) {
@@ -52,26 +47,21 @@ public class ConnectorTool {
         return 0;
     }
 
-    public static int xxConnectPositive(TETile[][] world, int xxStep, Room room2, int yyStepedroom2) {
-        Terrain.xxHallway(world, room2.pos.xxPos, room2.pos.yyPos + yyStepedroom2, xxStep);
+    //room2 -> room1 the direction manipulate by give value
+    //seprate it to xx and yy
+    public static int xxConnect(TETile[][] World, int xxStep, Room room, int xxSteped, int yySteped) {
+        if (xxStep < 0) {
+            xxStep = -xxStep;
+        }
+        Terrain.xxHallway(World, room.pos.xxPos + xxSteped, room.pos.yyPos + yySteped, xxStep);
         return xxStep;
     }
 
-    public static int xxConnectNegative(TETile[][] world, int xxStep, Room room1, int yyStepedroom1) {
-        xxStep = -xxStep;
-        Terrain.xxHallway(world, room1.pos.xxPos, room1.pos.yyPos + yyStepedroom1, xxStep);
-        return xxStep;
-    }
-
-
-    public static int yyConnectPositive(TETile[][] world, int yyStep, Room room2, int xxStepedroom2) {
-        Terrain.yyHallway(world, room2.pos.xxPos + xxStepedroom2, room2.pos.yyPos, yyStep);
-        return yyStep;
-    }
-
-    public static int yyConnectNegative(TETile[][] world, int yyStep, Room room1, int xxStepedroom1) {
-        yyStep = -yyStep;
-        Terrain.yyHallway(world, room1.pos.xxPos + xxStepedroom1, room1.pos.yyPos, yyStep);
+    public static int yyConnect(TETile[][] World, int yyStep, Room room, int xxSteped, int yySteped) {
+        if (yyStep < 0) {
+            yyStep = -yyStep;
+        }
+        Terrain.yyHallway(World, room.pos.xxPos + xxSteped, room.pos.yyPos + yySteped, yyStep);
         return yyStep;
     }
 }

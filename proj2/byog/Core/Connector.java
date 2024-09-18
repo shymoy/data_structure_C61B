@@ -2,18 +2,14 @@ package byog.Core;
 
 import byog.TileEngine.TETile;
 
-import java.util.Iterator;
-
 import static byog.Core.ConnectorTool.*;
 
 
 public class Connector {
     private final TETile[][] world;
-    private final Iterator<Room> it;
 
     public Connector(TETile[][] world) {
         this.world = world;
-        it = Terrain.rooms.iterator();
     }
 
     public void connect() {
@@ -56,15 +52,18 @@ public class Connector {
 
         //draw xxline
         if (xxLengthDiffer > 0) {
-            xxStepedroom2 += xxConnectPositive(world, xxStep, room2, yyStepedroom2);
+            //room2 -> room1
+            xxStepedroom2 += xxConnect(world, xxStep, room2, xxStepedroom2, yyStepedroom2);
         } else {
-            xxStepedroom1 += xxConnectNegative(world, xxStep, room1, yyStepedroom1);
+            xxStepedroom1 += xxConnect(world, xxStep, room1, xxStepedroom1, yyStepedroom1);
+
         }
         //draw yyline
         if (yyLengthDiffer > 0) {
-            yyStepedroom2 += yyConnectPositive(world, yyStep, room2, xxStepedroom2);
+            yyStepedroom2 += yyConnect(world, yyStep, room2, xxStepedroom2, yyStepedroom2);
+
         } else {
-            yyStepedroom1 += yyConnectNegative(world, yyStep, room1, xxStepedroom1);
+            yyStepedroom2 += yyConnect(world, yyStep, room1, xxStepedroom1, yyStepedroom1);
         }
     }
 }
