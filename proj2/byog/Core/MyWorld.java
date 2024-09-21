@@ -9,7 +9,7 @@ import java.util.Random;
 public class MyWorld {
     private static final int WIDTH = 90;
     private static final int HEIGHT = 40;
-    public static final int SEED = 922;
+    public static final int SEED = 262;
     //create the seed
     public static final Random random = new Random(SEED);
 
@@ -33,7 +33,7 @@ public class MyWorld {
         //[1,10]
 //        int createTimes = random.nextInt(10) + 1;
 
-        for (int i = 0; i < 2; i++) {
+        for (int i = 0; i < 10; i++) {
             //[1,WIDTH] 注意等会要处理右边和上面
             int xxPos = random.nextInt(WIDTH) + 1;
             //[1,HEIGHT]

@@ -25,7 +25,13 @@ public class Connector {
 
     private void connectChooser() {
         Room room1 = getRoomNotConnected();
-        Room room2 = getRoomNotConnected();
+        Room room2;
+        while (true) {
+            room2 = getRoomNotConnected();
+            if (!room2.equals(room1)) {
+                break;
+            }
+        }
         connectCounter(room1, room2);
         while (checkConnection()) {
             Room room3 = getRoomNotConnected();
@@ -37,33 +43,17 @@ public class Connector {
 
     private void connectHelper(Room room1, Room room2) {
         //if positive,should start from room2 to room1
-        int xxLengthDiffer = caulLengthDiffer(room1.pos.xxPos - room2.pos.xxPos);
-        int yyLengthDiffer = caulLengthDiffer(room1.pos.yyPos - room2.pos.yyPos);
+        int xxLengthDiffer = room1.pos.xxPos - room2.pos.xxPos;
+        int yyLengthDiffer = room1.pos.yyPos - room2.pos.yyPos;
 
-        //to record have steped how long for room1 and room2 respectively
-        int xxStepedroom1 = 0;
-        int yyStepedroom1 = 0;
-        int xxStepedroom2 = 0;
-        int yyStepedroom2 = 0;
+        int xxStep = -xxLengthDiffer;
+        int yyStep = -yyLengthDiffer;
 
-        //to decide how long will step this time(this for test)
-        int xxStep = xxLengthDiffer;
-        int yyStep = yyLengthDiffer;
+        int xxStepped = 0;
+        int yyStepped = 0;
+        //如果是正的,就要往负方向走, 如果是负的,就要往正方向走,step是为了缩小距离!!!!
+        xxStepped += xxConnect(world, xxStep, room1, xxStepped, yyStepped);
+        yyStepped += yyConnect(world, yyStep, room1, xxStepped, yyStepped);
 
-        //draw xxline
-        if (xxLengthDiffer > 0) {
-            //room2 -> room1
-            xxStepedroom2 += xxConnect(world, xxStep, room2, xxStepedroom2, yyStepedroom2);
-        } else {
-            xxStepedroom1 += xxConnect(world, xxStep, room1, xxStepedroom1, yyStepedroom1);
-
-        }
-        //draw yyline
-        if (yyLengthDiffer > 0) {
-            yyStepedroom2 += yyConnect(world, yyStep, room2, xxStepedroom2, yyStepedroom2);
-
-        } else {
-            yyStepedroom2 += yyConnect(world, yyStep, room1, xxStepedroom1, yyStepedroom1);
-        }
     }
 }

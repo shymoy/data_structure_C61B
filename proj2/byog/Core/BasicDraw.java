@@ -1,6 +1,7 @@
 package byog.Core;
 
-import byog.TileEngine.*;
+import byog.TileEngine.TETile;
+import byog.TileEngine.Tileset;
 
 public class BasicDraw {
     public static void drawRoom(TETile[][] world, int xxPos, int yyPos, int tempWidth, int tempHeight) {
@@ -10,8 +11,13 @@ public class BasicDraw {
 
     private static void drawFloor(TETile[][] world, int xxPos, int yyPos, int tempWidth, int tempHeight) {
         //take care of the boundary since their bound = [1, Width]
-        for (int x = xxPos; x < world.length - 1 && x < xxPos + tempWidth; x++) {
-            for (int y = yyPos; y < world[0].length - 1 && y < yyPos + tempHeight; y++) {
+        int xxStart = tempWidth > 0 ? xxPos : xxPos + tempWidth;
+        int xxEnd = tempWidth > 0 ? xxPos + tempWidth : xxPos;
+        int yyStart = tempHeight > 0 ? yyPos : yyPos + tempHeight;
+        int yyEnd = tempHeight > 0 ? yyPos + tempHeight : yyPos;
+
+        for (int x = xxStart; x < xxEnd && x < world.length - 1; x++) {
+            for (int y = yyStart; y < world[0].length - 1 && y < yyEnd; y++) {
                 world[x][y] = Tileset.FLOOR;
             }
         }
@@ -19,8 +25,13 @@ public class BasicDraw {
 
     private static void drawWall(TETile[][] world, int xxPos, int yyPos, int tempWidth, int tempHeight) {
         //To wrap the floor
-        for (int x = xxPos - 1; x < world.length && x < xxPos + tempWidth + 1; x++) {
-            for (int y = yyPos - 1; y < world[0].length && y < yyPos + tempHeight + 1; y++) {
+        int xxStart = tempWidth > 0 ? xxPos : xxPos + tempWidth;
+        int xxEnd = tempWidth > 0 ? xxPos + tempWidth : xxPos;
+        int yyStart = tempHeight > 0 ? yyPos : yyPos + tempHeight;
+        int yyEnd = tempHeight > 0 ? yyPos + tempHeight : yyPos;
+
+        for (int x = xxStart - 1; x < world.length && x < xxEnd + 1; x++) {
+            for (int y = yyStart - 1; y < world[0].length && y < yyEnd + 1; y++) {
                 if (world[x][y] != Tileset.WALL && world[x][y] != Tileset.FLOOR) {
                     world[x][y] = Tileset.WALL;
                 }

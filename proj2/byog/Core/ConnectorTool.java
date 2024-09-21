@@ -37,30 +37,14 @@ public class ConnectorTool {
         return Terrain.rooms.get(n);
     }
 
-    //fix the lengthDiffer
-    public static int caulLengthDiffer(int Differ) {
-        if (Differ > 0) {
-            return Differ + 1;
-        } else if (Differ < 0) {
-            return Differ - 1;
-        }
-        return 0;
-    }
-
     //room2 -> room1 the direction manipulate by give value
     //seprate it to xx and yy
     public static int xxConnect(TETile[][] World, int xxStep, Room room, int xxSteped, int yySteped) {
-        if (xxStep < 0) {
-            xxStep = -xxStep;
-        }
         Terrain.xxHallway(World, room.pos.xxPos + xxSteped, room.pos.yyPos + yySteped, xxStep);
         return xxStep;
     }
 
     public static int yyConnect(TETile[][] World, int yyStep, Room room, int xxSteped, int yySteped) {
-        if (yyStep < 0) {
-            yyStep = -yyStep;
-        }
         Terrain.yyHallway(World, room.pos.xxPos + xxSteped, room.pos.yyPos + yySteped, yyStep);
         return yyStep;
     }

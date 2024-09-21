@@ -3,9 +3,7 @@ package byog.Core;
 import byog.TileEngine.TETile;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 public class Terrain {
     public static List<Room> rooms = new ArrayList<>();
@@ -20,10 +18,12 @@ public class Terrain {
     }
 
     public static void xxHallway(TETile[][] world, int xxPos, int yyPos, int tempWidth) {
+        tempWidth = tempWidth > 0 ? tempWidth + 1 : tempWidth - 1;
         BasicDraw.drawXHallway(world, xxPos, yyPos, tempWidth);
     }
 
     public static void yyHallway(TETile[][] world, int xxPos, int yyPos, int tempHeight) {
-        BasicDraw.drawYHallway(world, xxPos, yyPos, tempHeight);
+        tempHeight = tempHeight > 0 ? tempHeight + 1 : tempHeight - 1;
+        BasicDraw.drawYHallway(world, xxPos, yyPos, tempHeight + 1);
     }
 }
