@@ -6,8 +6,9 @@ public class ConnectorTool {
     //return a room has not connected
     public static Room getRoomNotConnected() {
         while (true) {
-            if (getRoomRandom().connectionLine == 0) {
-                return getRoomRandom();
+            Room room = getRoomRandom();
+            if (room.connectionLine == 0) {
+                return room;
             }
         }
     }
@@ -25,8 +26,9 @@ public class ConnectorTool {
     //return a room has got connected
     public static Room getRoomConnected() {
         while (true) {
-            if (getRoomRandom().connectionLine > 0) {
-                return getRoomRandom();
+            Room room = getRoomRandom();
+            if (room.connectionLine > 0) {
+                return room;
             }
         }
     }
@@ -39,13 +41,11 @@ public class ConnectorTool {
 
     //room2 -> room1 the direction manipulate by give value
     //seprate it to xx and yy
-    public static int xxConnect(TETile[][] World, int xxStep, Room room, int xxSteped, int yySteped) {
+    public static void xxConnect(TETile[][] World, int xxStep, Room room, int xxSteped, int yySteped) {
         Terrain.xxHallway(World, room.pos.xxPos + xxSteped, room.pos.yyPos + yySteped, xxStep);
-        return xxStep;
     }
 
-    public static int yyConnect(TETile[][] World, int yyStep, Room room, int xxSteped, int yySteped) {
+    public static void yyConnect(TETile[][] World, int yyStep, Room room, int xxSteped, int yySteped) {
         Terrain.yyHallway(World, room.pos.xxPos + xxSteped, room.pos.yyPos + yySteped, yyStep);
-        return yyStep;
     }
 }
