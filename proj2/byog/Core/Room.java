@@ -7,7 +7,7 @@ public class Room {
     int connectionLine;
     Position pos;
 
-    public class Position {
+    public static class Position {
         int xxPos;
         int yyPos;
 
