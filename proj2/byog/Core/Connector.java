@@ -3,6 +3,7 @@ package byog.Core;
 import byog.TileEngine.TETile;
 
 import static byog.Core.ConnectorTool.*;
+import static byog.Core.Game.random;
 
 
 public class Connector {
@@ -56,14 +57,14 @@ public class Connector {
             } else if (Math.abs(yyStepped) == Math.abs(yyLengthDiffer)) {
                 x = 0;
             } else {
-                x = MyWorld.random.nextInt(2);
+                x = random.nextInt(2);
             }
 
             if (x == 0 && Math.abs(xxStepped) != Math.abs(xxLengthDiffer)) {
 
                 int xxRemain = Math.abs(xxLengthDiffer) - Math.abs(xxStepped);
 
-                int xxStep = MyWorld.random.nextInt(xxRemain) + 1;
+                int xxStep = random.nextInt(xxRemain) + 1;
                 xxStep = xxLengthDiffer > 0 ? -xxStep : xxStep;
                 xxConnect(world, xxStep, room1, xxStepped, yyStepped);
                 xxStepped += xxStep;
@@ -73,7 +74,7 @@ public class Connector {
 
                 int yyRemain = Math.abs(yyLengthDiffer) - Math.abs(yyStepped);
 
-                int yystep = MyWorld.random.nextInt(yyRemain) + 1;
+                int yystep = random.nextInt(yyRemain) + 1;
                 yystep = yyLengthDiffer > 0 ? -yystep : yystep;
                 yyConnect(world, yystep, room1, xxStepped, yyStepped);
                 yyStepped += yystep;

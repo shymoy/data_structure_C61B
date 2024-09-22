@@ -3,6 +3,7 @@ package byog.Core;
 import byog.TileEngine.TETile;
 
 public class ConnectorTool {
+
     //return a room has not connected
     public static Room getRoomNotConnected() {
         while (true) {
@@ -35,7 +36,7 @@ public class ConnectorTool {
 
     //return a random room
     private static Room getRoomRandom() {
-        int n = MyWorld.random.nextInt(Terrain.rooms.size());
+        int n = Game.random.nextInt(Terrain.rooms.size());
         return Terrain.rooms.get(n);
     }
 
