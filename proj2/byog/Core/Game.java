@@ -4,8 +4,11 @@ import byog.TileEngine.TERenderer;
 import byog.TileEngine.TETile;
 import byog.TileEngine.Tileset;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.Random;
-import java.util.Scanner;
 
 public class Game {
     public static TERenderer ter = new TERenderer();
@@ -46,6 +49,7 @@ public class Game {
 
         boolean newGame = false;
         boolean seedCompelete = false;
+        boolean loadGame = false;
 
         StringBuilder seedBuilder = new StringBuilder();
 
@@ -58,10 +62,32 @@ public class Game {
             } else if (ch == 's' && !seedCompelete && newGame) {
                 SEED = Long.parseLong(seedBuilder.toString());
                 seedCompelete = true;
+            } else if (ch == ':' && seedCompelete && newGame) {
+                try (FileWriter fw = new FileWriter("./saveGame.txt")) {
+                    // 将 SEED 作为字符串写入文件
+                    fw.write(String.valueOf(SEED));
+                    System.out.println("Game saved successfully.");
+                } catch (IOException e) {
+                    // 保存失败时的提示
+                    System.out.println("ERROR: Failed to save the game.");
+                    e.printStackTrace();
+                }
+            } else if (ch == 'q' && seedCompelete && newGame) {
+                System.exit(0);
+            } else if (ch == 'l' && !seedCompelete && !newGame) {
+                try (BufferedReader br = new BufferedReader(new FileReader("./saveGame.txt"))) {
+                    SEED = Long.parseLong(br.readLine());
+                    loadGame = true;
+                    System.out.println("Game Load successfully.");
+                } catch (IOException e) {
+                    System.out.println("ERROR: Failed to Load the game.");
+                    e.printStackTrace();
+                    System.exit(0);
+                }
             }
         }
-        
-        if (!seedCompelete) {
+
+        if (!seedCompelete && !loadGame) {
             System.out.println("ERROR: Make sure you input a seed with 'N' before and 'S' after");
             SEED = 1;
         }
@@ -101,10 +127,9 @@ public class Game {
 
     public static void main(String[] args) {
         ter.initialize(WIDTH, HEIGHT);
-        Scanner scanner = new Scanner(System.in);
-        String input = scanner.nextLine();
 
         //create the Array
-        ter.renderFrame(playWithInputString(input));
+
+        ter.renderFrame(playWithInputString("l"));
     }
 }
