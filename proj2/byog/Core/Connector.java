@@ -2,84 +2,69 @@ package byog.Core;
 
 import byog.TileEngine.TETile;
 
-import static byog.Core.ConnectorTool.*;
-import static byog.Core.Game.random;
-
+import java.util.Random;
 
 public class Connector {
-    private final TETile[][] world;
+    Room room1;
+    Room room2;
+    int xxCenterDiffer;
+    int yyCenterDiffer;
+    int xxStepped;
+    int yyStepped;
+    TETile[][] world;
+    Random rand;
 
-    public Connector(TETile[][] world) {
+    public Connector(TETile[][] world, Room room1, Room room2, Random rand) {
         this.world = world;
+       xxCenterDiffer = room1.getXxPosition() - room2.getXxPosition();
+       yyCenterDiffer = room1.getYyPosition() - room2.getYyPosition();
+       this.rand = rand;
+       xxStepped = 0;
+       yyStepped = 0;
+       this.room1 = room1;
+       this.room2 = room2;
+       connect();
     }
 
     public void connect() {
-        connectChooser();
-    }
+        while (xxStepped != -xxCenterDiffer || yyStepped != -yyCenterDiffer) {
+            int xxRemain = -xxCenterDiffer - xxStepped;
+            int yyRemain = -yyCenterDiffer - yyStepped;
+            if (yyStepped == -yyCenterDiffer) {
+                int xxStep = xxCenterDiffer > 0 ? RandomUtils.uniform(rand, xxRemain, 0) : RandomUtils.uniform(rand, 0, xxRemain) + 1;
 
-    //first connect two rooms,then choose one no connectionline and another connected room
-    private void connectCounter(Room room1, Room room2) {
-        connectHelper(room1, room2);
-        room1.connectionLine++;
-        room2.connectionLine++;
-    }
-
-    private void connectChooser() {
-        Room room1 = getRoomNotConnected();
-        Room room2;
-        //ensure to choose two different room
-        do {
-            room2 = getRoomNotConnected();
-        } while (!room1.equals(room2));
-
-        connectCounter(room1, room2);
-
-        while (checkConnection()) {
-            Room room3 = getRoomNotConnected();
-            Room room4 = getRoomConnected();
-            connectCounter(room3, room4);
-        }
-    }
-
-
-    private void connectHelper(Room room1, Room room2) {
-        //if positive,should start from room2 to room1
-        int xxLengthDiffer = room1.pos.xxPos - room2.pos.xxPos;
-        int yyLengthDiffer = room1.pos.yyPos - room2.pos.yyPos;
-
-        int xxStepped = 0;
-        int yyStepped = 0;
-
-        while (Math.abs(xxStepped) != Math.abs(xxLengthDiffer) || Math.abs(yyStepped) != Math.abs(yyLengthDiffer)) {
-            int x;
-            if (Math.abs(xxStepped) == Math.abs(xxLengthDiffer)) {
-                x = 1;
-            } else if (Math.abs(yyStepped) == Math.abs(yyLengthDiffer)) {
-                x = 0;
-            } else {
-                x = random.nextInt(2);
-            }
-
-            if (x == 0 && Math.abs(xxStepped) != Math.abs(xxLengthDiffer)) {
-
-                int xxRemain = Math.abs(xxLengthDiffer) - Math.abs(xxStepped);
-
-                int xxStep = random.nextInt(xxRemain) + 1;
-                xxStep = xxLengthDiffer > 0 ? -xxStep : xxStep;
-                xxConnect(world, xxStep, room1, xxStepped, yyStepped);
+                xxConnection(xxStep);
                 xxStepped += xxStep;
-            }
+            } else if (xxStepped == -xxCenterDiffer) {
+                int yyStep = yyCenterDiffer > 0 ? RandomUtils.uniform(rand, yyRemain, 0)  : RandomUtils.uniform(rand, 0, yyRemain) + 1;
 
-            if (x == 1 && Math.abs(yyStepped) != Math.abs(yyLengthDiffer)) {
+                yyConnection(yyStepped);
+                yyStepped += yyStep;
+            } else {
+                int xxStep = xxCenterDiffer > 0 ? RandomUtils.uniform(rand, xxRemain, 0)  : RandomUtils.uniform(rand, 0, xxRemain) + 1;
 
-                int yyRemain = Math.abs(yyLengthDiffer) - Math.abs(yyStepped);
+                int yyStep = yyCenterDiffer > 0 ? RandomUtils.uniform(rand, yyRemain, 0)  : RandomUtils.uniform(rand, 0, yyRemain) + 1 ;
 
-                int yystep = random.nextInt(yyRemain) + 1;
-                yystep = yyLengthDiffer > 0 ? -yystep : yystep;
-                yyConnect(world, yystep, room1, xxStepped, yyStepped);
-                yyStepped += yystep;
+                randomConnection(xxStep, yyStep);
             }
         }
+    }
 
+    private void randomConnection(int xxStep, int yyStep) {
+        int x = RandomUtils.uniform(rand, 2);
+        if (x == 0) {
+            xxConnection(xxStep);
+            xxStepped += xxStep;
+        }else if (x == 1) {
+            yyConnection(yyStep);
+            yyStepped += yyStep;
+        }
+    }
+    private void xxConnection(int xxStep) {
+        BasicDraw.drawHallway(world, room1.getXxPosition() + xxStepped, room1.getYyPosition() + yyStepped, xxStep, 1);
+    }
+
+    private void yyConnection(int yyStep) {
+        BasicDraw.drawHallway(world, room1.getXxPosition() + xxStepped, room1.getYyPosition() + yyStepped, 1, yyStep);
     }
 }

@@ -4,25 +4,18 @@ import byog.TileEngine.TERenderer;
 import byog.TileEngine.TETile;
 import byog.TileEngine.Tileset;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
 import java.util.Random;
 
 public class Game {
-    public static TERenderer ter = new TERenderer();
+    TERenderer ter = new TERenderer();
     /* Feel free to change the width and height. */
     public static final int WIDTH = 80;
     public static final int HEIGHT = 30;
-    public static long SEED;
-    public static Random random;
-
 
     /**
      * Method used for playing a fresh game. The game should start from the main menu.
      */
-    public static void playWithKeyboard() {
+    public void playWithKeyboard() {
     }
 
     /**
@@ -34,102 +27,50 @@ public class Game {
      * world. However, the behavior is slightly different. After playing with "n123sss:q", the game
      * should save, and thus if we then called playWithInputString with the string "l", we'd expect
      * to get the exact same world back again, since this corresponds to loading the saved game.
-     *
      * @param input the input string to feed to your program
      * @return the 2D TETile[][] representing the state of the world
      */
-    public static TETile[][] playWithInputString(String input) {
+    public TETile[][] playWithInputString(String input) {
         // TODO: Fill out this method to run the game using the input passed in,
         // and return a 2D tile representation of the world that would have been
         // drawn if the same inputs had been given to playWithKeyboard().
 
         TETile[][] finalWorldFrame = new TETile[WIDTH][HEIGHT];
 
-        input = input.toLowerCase();
+        drawBackground(finalWorldFrame);
 
-        boolean newGame = false;
-        boolean seedCompelete = false;
-        boolean loadGame = false;
+        Seed seed = getSeed( input.toLowerCase());
 
-        StringBuilder seedBuilder = new StringBuilder();
+        Random rand = seed.getRandom();
 
-        for (int i = 0; i < input.length(); i++) {
-            char ch = input.charAt(i);
-            if (ch == 'n') {
-                newGame = true;
-            } else if (Character.isDigit(ch) && !seedCompelete && newGame) {
-                seedBuilder.append(ch);
-            } else if (ch == 's' && !seedCompelete && newGame) {
-                SEED = Long.parseLong(seedBuilder.toString());
-                seedCompelete = true;
-            } else if (ch == ':' && seedCompelete && newGame) {
-                try (FileWriter fw = new FileWriter("./saveGame.txt")) {
-                    // 将 SEED 作为字符串写入文件
-                    fw.write(String.valueOf(SEED));
-                    System.out.println("Game saved successfully.");
-                } catch (IOException e) {
-                    // 保存失败时的提示
-                    System.out.println("ERROR: Failed to save the game.");
-                    e.printStackTrace();
-                }
-            } else if (ch == 'q' && seedCompelete && newGame) {
-                System.exit(0);
-            } else if (ch == 'l' && !seedCompelete && !newGame) {
-                try (BufferedReader br = new BufferedReader(new FileReader("./saveGame.txt"))) {
-                    SEED = Long.parseLong(br.readLine());
-                    loadGame = true;
-                    System.out.println("Game Load successfully.");
-                } catch (IOException e) {
-                    System.out.println("ERROR: Failed to Load the game.");
-                    e.printStackTrace();
-                    System.exit(0);
-                }
-            }
-        }
-
-        if (!seedCompelete && !loadGame) {
-            System.out.println("ERROR: Make sure you input a seed with 'N' before and 'S' after");
-            SEED = 1;
-        }
-
-        random = new Random(SEED);
-        worldGenerator(finalWorldFrame);
+        WorldGenerator.generateWorld(finalWorldFrame, rand);
         return finalWorldFrame;
     }
 
-    private static void worldGenerator(TETile[][] worldFrame) {
-        DrawBlack(worldFrame);
-        for (int i = 0; i < random.nextInt(15) + 1; i++) {
-            //[1,WIDTH] 注意等会要处理右边和上面
-            int xxPos = random.nextInt(WIDTH) + 1;
-            //[1,HEIGHT]
-            int yyPos = random.nextInt(HEIGHT) + 1;
-            int tempWidth = random.nextInt(WIDTH / 5) + 1;
-            int tempHeight = random.nextInt(HEIGHT / 5) + 1;
+    private Seed getSeed(String input) {
+        boolean newGame = false;
+        boolean seedCompelete = false;
+        //restore the seed as string
+        StringBuilder seedBuild = new StringBuilder();
+        Seed seed = new Seed();
 
-            if (xxPos < worldFrame.length - 1 && yyPos < worldFrame[0].length - 1) {
-                Terrain.room(worldFrame, xxPos, yyPos, tempWidth, tempHeight);
-            }
+        for (Character c : input.toCharArray()) {
+            if (c.equals('n') && !newGame) {
+                newGame = true;
+            } else if (c.equals('s') && !seedCompelete && newGame) {
+                //set the seed
+                seed.setSeed(Long.parseLong(seedBuild.toString()));
+                seedCompelete = true;
+            } else { seedBuild.append(c); }
         }
-
-        Connector connector = new Connector(worldFrame);
-
-        connector.connect();
+        return seed;
     }
 
-    private static void DrawBlack(TETile[][] world) {
+    private void drawBackground(TETile[][] worldFrame) {
         for (int x = 0; x < WIDTH; x++) {
             for (int y = 0; y < HEIGHT; y++) {
-                world[x][y] = Tileset.NOTHING;
+                worldFrame[x][y] = Tileset.NOTHING;
             }
         }
-    }
-
-    public static void main(String[] args) {
-        ter.initialize(WIDTH, HEIGHT);
-
-        //create the Array
-
-        ter.renderFrame(playWithInputString("l"));
     }
 }

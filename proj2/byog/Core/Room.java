@@ -1,25 +1,31 @@
 package byog.Core;
 
-
-import java.util.Objects;
-
 public class Room {
-    int connectionLine;
-    Position pos;
+    private final int width;
+    private final int height;
+    private final int xxPosition;
+    private final int yyPosition;
 
-    public static class Position {
-        int xxPos;
-        int yyPos;
-
-        public Position(int xxPos, int yyPos) {
-            this.xxPos = xxPos;
-            this.yyPos = yyPos;
-        }
+    public Room (int width, int height, int xxPosition, int yyPosition) {
+        this.width = width;
+        this.height = height;
+        this.xxPosition = xxPosition;
+        this.yyPosition = yyPosition;
+    }
+    public int getWidth() {
+        return width;
     }
 
-    public Room(int xxPos, int yyPos) {
-        connectionLine = 0;
-        pos = new Position(xxPos, yyPos);
+    public int getHeight() {
+        return height;
+    }
+
+    public int getXxPosition() {
+        return xxPosition;
+    }
+
+    public int getYyPosition() {
+        return yyPosition;
     }
 
     @Override
@@ -27,11 +33,8 @@ public class Room {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Room room = (Room) o;
-        return pos.xxPos == room.pos.xxPos && pos.yyPos == room.pos.yyPos;
-    }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(pos.xxPos, pos.yyPos);
+        return getXxPosition() == room.getXxPosition() &&
+                getYyPosition() == room.getYyPosition();
     }
 }
