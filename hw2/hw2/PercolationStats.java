@@ -6,7 +6,7 @@ import edu.princeton.cs.algs4.StdStats;
 public class PercolationStats {
     private int times;
     private final double[] thresholds;
-    PercolationFactory pf;
+    private PercolationFactory pf;
 
     public PercolationStats(int N, int T, PercolationFactory pf) {
         if (N <= 0 || T <= 0) {
@@ -50,3 +50,4 @@ public class PercolationStats {
         return mean + 1.96 * stddev / Math.sqrt(times);
     }                              // high endpoint of 95% confidence interval
 }
+

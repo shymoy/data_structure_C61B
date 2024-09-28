@@ -36,7 +36,7 @@ public class Percolation {
 
     private void validateIndices(int i, int j) {
         if (i < 0 || i >= size || j < 0 || j >= size) {
-            throw new IllegalArgumentException("Index out of bounds");
+            throw new IndexOutOfBoundsException("Index out of bounds");
         }
     }
 
@@ -87,11 +87,15 @@ public class Percolation {
     }
 
     private void connectIfopen(int row1, int col1, int row2, int col2) {
-        if (row1 >= 0 && row1 < size &&
-                col1 >= 0 && col1 < size &&
-                isOpen(row1, col1) && isOpen(row2, col2)) {
+        if (row1 >= 0 && row1 < size
+                && col1 >= 0 && col1 < size
+                && isOpen(row1, col1) && isOpen(row2, col2)) {
             uf.union(index(row1, col1), index(row2, col2));
             ufHelper.union(index(row1, col2), index(row2, col1));
         }
+    }
+
+    public static void main(String[] args) {
+
     }
 }
