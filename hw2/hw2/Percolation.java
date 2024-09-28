@@ -20,8 +20,8 @@ public class Percolation {
         //initial all element
         openSiteNumber = 0;
         this.size = N;
-        uf = new WeightedQuickUnionUF(N * N + 1);
-        ufHelper = new WeightedQuickUnionUF(N * N + 2);
+        uf = new WeightedQuickUnionUF(N * N + 1); 
+        ufHelper = new WeightedQuickUnionUF(N * N + 2); 
         topSite = N * N;
         bottomSite = N * N + 1;
         grid = new boolean[N][N];
