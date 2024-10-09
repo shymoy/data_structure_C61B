@@ -2,11 +2,11 @@ package hw4.puzzle;
 
 import edu.princeton.cs.algs4.Queue;
 
-public class Board implements WorldState{
+public class Board implements WorldState {
     private final int[][] tiles;
     private int N;
     private int estimateDis;
-    private final static int  BLANK = 0;
+    private static final int BLANK = 0;
 
     public Board(int[][] tiles) {
         if (tiles.length != tiles[0].length || tiles == null || tiles[0] == null) {
@@ -70,14 +70,13 @@ public class Board implements WorldState{
         }
         return neighbors;
     }
-
     public int hamming() {
         int dist = 0;
         for (int i = 0; i < N; i++) {
             for (int j = 0; j < N; j++) {
-                if (tileAt(i, j) == BLANK) {
+                if (tiles[i][j] == 0) {
                     continue;
-                } else if (tileAt(i, j) != i * N + j) {
+                } else if (tiles[i][j] != i * N + j + 1) {
                     dist++;
                 }
             }
@@ -112,10 +111,14 @@ public class Board implements WorldState{
 
     @Override
     public boolean equals(Object y) {
-        if (y == this) return true;
+        if (y == this) {
+            return true;
+        }
+
         if (y == null || this.getClass() != y.getClass()) {
             return false;
         }
+
         Board other = (Board) y;
         if (this.N != other.N) return false;
         for (int i = 0; i < N; i++) {
@@ -136,7 +139,6 @@ public class Board implements WorldState{
     /** Returns the string representation of the board. */
     public String toString() {
         StringBuilder s = new StringBuilder();
-        int N = size();
         s.append(N + "\n");
         for (int i = 0; i < N; i++) {
             for (int j = 0; j < N; j++) {
