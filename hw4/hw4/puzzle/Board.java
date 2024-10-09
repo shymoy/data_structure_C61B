@@ -120,7 +120,9 @@ public class Board implements WorldState {
         }
 
         Board other = (Board) y;
-        if (this.N != other.N) return false;
+        if (this.N != other.N) {
+            return false;
+        }
         for (int i = 0; i < N; i++) {
             for (int j = 0; j < N; j++) {
                 if (this.tiles[i][j] != other.tiles[i][j]) {
@@ -142,7 +144,7 @@ public class Board implements WorldState {
         s.append(N + "\n");
         for (int i = 0; i < N; i++) {
             for (int j = 0; j < N; j++) {
-                s.append(String.format("%2d ", tileAt(i,j)));
+                s.append(String.format("%2d ", tileAt(i, j)));
             }
             s.append("\n");
         }

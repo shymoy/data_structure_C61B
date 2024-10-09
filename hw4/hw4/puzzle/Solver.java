@@ -33,7 +33,7 @@ public class Solver {
         if (w == null) {
             throw new IllegalArgumentException("WorldState cannot be null.");
         }
-        
+
         pq = new MinPQ<>();
         pq.insert(new SearchNode(w, 0, null));
 
@@ -61,9 +61,11 @@ public class Solver {
 
     public Iterable<WorldState> solution() {
         Deque<WorldState> queue = new LinkedList<>();
-        while (state != null) {
-            queue.push(state.w);
-            state = state.previousNode;
+        SearchNode currentNode = state; // 使用临时变量
+
+        while (currentNode != null) {
+            queue.push(currentNode.w);
+            currentNode = currentNode.previousNode; // 只移动临时变量
         }
         return queue;
     }
