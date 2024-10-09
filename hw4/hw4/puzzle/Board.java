@@ -9,7 +9,7 @@ public class Board implements WorldState {
     private static final int BLANK = 0;
 
     public Board(int[][] tiles) {
-        if (tiles.length != tiles[0].length || tiles == null || tiles[0] == null) {
+        if (tiles == null || tiles[0] == null || tiles.length == tiles[0].length) {
             throw new IllegalArgumentException();
         }
 
